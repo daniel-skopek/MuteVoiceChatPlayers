@@ -4,13 +4,13 @@ import de.maxhenkel.voicechat.api.VoicechatConnection;
 import de.maxhenkel.voicechat.api.VoicechatPlugin;
 import de.maxhenkel.voicechat.api.events.*;
 
-import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class LitebansVCPlugin implements VoicechatPlugin {
 
-	private static final Set<UUID> mutedPlayers = new HashSet<>();
+	private static final Set<UUID> mutedPlayers = ConcurrentHashMap.newKeySet();
 
 	public static void mutePlayer(UUID uuid) {
 		mutedPlayers.add(uuid);

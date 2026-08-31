@@ -1,7 +1,8 @@
 name: MuteVoiceChatPlayers
 version: '1.0.0'
 main: me.eren.muteVoiceChatPlayers.MuteVoiceChatPlayers
-api-version: '1.18'
+api-version: '26.2'
+folia-supported: true
 depend:
   - voicechat
   - LiteBans

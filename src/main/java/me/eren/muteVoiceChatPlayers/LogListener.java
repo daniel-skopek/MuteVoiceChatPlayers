@@ -1,7 +1,6 @@
 package me.eren.muteVoiceChatPlayers;
 
 import litebans.api.Database;
-import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -19,12 +18,13 @@ public class LogListener implements Listener {
 
 	@EventHandler
 	public void onPlayerJoin(PlayerJoinEvent event) {
-		Bukkit.getScheduler().runTaskAsynchronously(MuteVoiceChatPlayers.instance(), () -> {
-			UUID uuid = event.getPlayer().getUniqueId();
-			String ip = event.getPlayer().getAddress().getAddress().getHostAddress();
+		MuteVoiceChatPlayers plugin = MuteVoiceChatPlayers.instance();
+		UUID uuid = event.getPlayer().getUniqueId();
+		String ip = event.getPlayer().getAddress().getAddress().getHostAddress();
 
+		plugin.getServer().getAsyncScheduler().runNow(plugin, (task) -> {
 			if (Database.get().isPlayerMuted(uuid, ip)) {
-				LitebansVCPlugin.mutePlayer(event.getPlayer().getUniqueId());
+				LitebansVCPlugin.mutePlayer(uuid);
 			}
 		});
 	}
